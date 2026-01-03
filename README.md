@@ -11,8 +11,10 @@ VLESS со своим доменом. А что еще нужно для сча�
 - - Создаст пользователя для подключения, запретив вход от рута
 - - Добавит этому пользователю ключ для SSH, запретив вход по паролю
 
+## Установка
+
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/Akiyamov/xray-vps-setup/refs/heads/main/vps-setup.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/artemscine/xray-vps-setup/refs/heads/main/vps-setup.sh)
 ```
 
 Режимы установки:
@@ -22,5 +24,5 @@ bash <(wget -qO- https://raw.githubusercontent.com/Akiyamov/xray-vps-setup/refs/
 ## Удаление
 
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/Akiyamov/xray-vps-setup/refs/heads/main/uninstall.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/artemscine/xray-vps-setup/refs/heads/main/uninstall.sh)
 ```
