@@ -1,20 +1,15 @@
 {
   "log": {
-    "loglevel": "info"
+    "loglevel": "warning"
   },
   "inbounds": [
     {
-      "tag": "VLESS TCP VISION REALITY",
+      "tag": "VLESS-TCP-Reality",
       "listen": "0.0.0.0",
       "port": 443,
       "protocol": "vless",
       "settings": {
-        "clients": [
-        {
-          "id": "{{ xray_uuid.stdout}}",
-          "email": "default",
-          "flow": "xtls-rprx-vision"
-        }],
+        "clients": [],
         "decryption": "none"
       },
       "streamSettings": {
@@ -24,11 +19,11 @@
           "xver": 1,
           "dest": "127.0.0.1:4123",
           "serverNames": [
-            "{{ domain }}"
+            "$NODE_DOMAIN"
           ],
-          "privateKey": "{{ x25519_pik.stdout }}",
+          "privateKey": "$XRAY_PIK",
           "shortIds": [
-            "{{ short_id.stdout }}"
+            "$XRAY_SID"
           ]
         }
       },
@@ -36,7 +31,8 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ],
         "routeOnly": true
       }
@@ -58,7 +54,9 @@
   "routing": {
     "rules": [
       {
-        "protocol": "bittorrent",
+        "protocol": [
+          "bittorrent"
+        ],
         "outboundTag": "block"
       }
     ],
@@ -70,6 +68,8 @@
       "8.8.8.8"
     ],
     "queryStrategy": "UseIPv4",
+    "parallelQuery": true,
+    "optimisticCache": true,
     "disableFallback": false,
     "tag": "dns-aux"
   }

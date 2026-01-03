@@ -1,0 +1,43 @@
+# Marzneshin Configuration
+
+# Server binding
+UVICORN_HOST=127.0.0.1
+UVICORN_PORT=8000
+
+# Dashboard path (hidden URL)
+DASHBOARD_PATH=/$DASHBOARD_PATH/
+
+# Database
+SQLALCHEMY_DATABASE_URL=sqlite:////var/lib/marzneshin/db.sqlite3
+
+# Subscription settings
+SUBSCRIPTION_URL_PREFIX=https://$VLESS_DOMAIN
+
+# Custom templates
+CUSTOM_TEMPLATES_DIRECTORY=/var/lib/marzneshin/templates/
+HOME_PAGE_TEMPLATE=home/index.html
+# SUBSCRIPTION_PAGE_TEMPLATE=subscription/index.html
+
+# Authentication
+AUTH_GENERATION_ALGORITHM=xxh128
+# JWT_ACCESS_TOKEN_EXPIRE_MINUTES=1440
+
+# Telegram notifications (optional)
+# TELEGRAM_API_TOKEN=123456789:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+# TELEGRAM_ADMIN_ID=987654321
+
+# Webhook notifications (optional)
+# WEBHOOK_ADDRESS=http://127.0.0.1:9000/
+# WEBHOOK_SECRET=something-very-very-secret
+
+# Background tasks intervals (seconds)
+# TASKS_RECORD_USER_USAGES_INTERVAL=30
+# TASKS_REVIEW_USERS_INTERVAL=30
+
+# Notification settings
+# NOTIFY_REACHED_USAGE_PERCENT=80
+# NOTIFY_DAYS_LEFT=3
+
+# Development (disable in production)
+# DEBUG=false
+# DOCS=false

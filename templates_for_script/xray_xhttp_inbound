@@ -1,0 +1,38 @@
+{
+  "tag": "VLESS-XHTTP-Reality",
+  "listen": "0.0.0.0",
+  "port": 8443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+      "mode": "auto",
+      "path": "$XHTTP_PATH"
+    },
+    "security": "reality",
+    "realitySettings": {
+      "xver": 1,
+      "dest": "127.0.0.1:4123",
+      "serverNames": [
+        "$VLESS_DOMAIN"
+      ],
+      "privateKey": "$XRAY_PIK",
+      "shortIds": [
+        "$XRAY_SID"
+      ]
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ],
+    "routeOnly": true
+  }
+}

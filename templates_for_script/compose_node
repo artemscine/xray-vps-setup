@@ -9,27 +9,18 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/templates:/srv
 
-  marzneshin:
-    image: ghcr.io/artemscine/marzneshin:latest
-    container_name: marzneshin
-    restart: always
-    network_mode: host
-    env_file: ./marzneshin/.env
-    volumes:
-      - ./marzneshin_data:/var/lib/marzneshin
-    depends_on:
-      marznode:
-        condition: service_started
-
   marznode:
     image: ghcr.io/artemscine/marznode:latest
     container_name: marznode
     restart: always
     network_mode: host
     environment:
-      - SERVICE_ADDRESS=127.0.0.1
-      - SERVICE_PORT=53042
-      - INSECURE=True
+      - SERVICE_ADDRESS=$NODE_SERVICE_ADDRESS
+      - SERVICE_PORT=$NODE_SERVICE_PORT
+      - INSECURE=$NODE_INSECURE
+      - SSL_CLIENT_CERT_FILE=/var/lib/marznode/client.pem
+      - SSL_KEY_FILE=/var/lib/marznode/server-key.pem
+      - SSL_CERT_FILE=/var/lib/marznode/server.pem
       - XRAY_ENABLED=True
       - XRAY_EXECUTABLE_PATH=/usr/local/bin/xray
       - XRAY_ASSETS_PATH=/usr/local/lib/xray
@@ -42,7 +33,7 @@ services:
       - SING_BOX_ENABLED=False
     volumes:
       - ./marznode_data:/var/lib/marznode
-      - ./caddy/data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/$VLESS_DOMAIN:/certs:ro
+      - ./caddy/data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/$NODE_DOMAIN:/certs:ro
     depends_on:
       caddy:
         condition: service_started
